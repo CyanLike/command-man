@@ -1,0 +1,401 @@
+[
+  {
+    "id": "git-init",
+    "name": "git init",
+    "platform": "Git",
+    "summary": "创建新的 Git 仓库",
+    "aliases": ["初始化仓库", "init"],
+    "keywords": ["repository", "bare", "branch"],
+    "simple": [
+      { "command": "git init", "description": "在当前目录初始化仓库" },
+      { "command": "git init my-project", "description": "创建目录并初始化仓库" }
+    ],
+    "full": [
+      { "command": "git init --initial-branch=main", "description": "以 main 作为初始分支" },
+      { "command": "git init --bare project.git", "description": "创建用于共享的裸仓库" }
+    ]
+  },
+  {
+    "id": "git-clone",
+    "name": "git clone",
+    "platform": "Git",
+    "summary": "克隆远程 Git 仓库",
+    "aliases": ["克隆仓库", "clone"],
+    "keywords": ["remote", "depth", "branch", "submodule"],
+    "simple": [
+      { "command": "git clone https://github.com/owner/repo.git", "description": "克隆远程仓库" },
+      { "command": "git clone https://github.com/owner/repo.git my-folder", "description": "克隆到指定目录" }
+    ],
+    "full": [
+      { "command": "git clone --depth 1 https://github.com/owner/repo.git", "description": "仅克隆最近一次提交" },
+      { "command": "git clone --branch main --single-branch https://github.com/owner/repo.git", "description": "仅克隆指定分支" },
+      { "command": "git clone --recurse-submodules https://github.com/owner/repo.git", "description": "同时初始化并克隆子模块" }
+    ]
+  },
+  {
+    "id": "git-status",
+    "name": "git status",
+    "platform": "Git",
+    "summary": "查看工作区和暂存区状态",
+    "aliases": ["状态", "status"],
+    "keywords": ["modified", "staged", "untracked", "branch"],
+    "simple": [
+      { "command": "git status", "description": "查看详细仓库状态" },
+      { "command": "git status --short", "description": "以精简格式查看状态" }
+    ],
+    "full": [
+      { "command": "git status --short --branch", "description": "精简显示分支和文件状态" },
+      { "command": "git status --ignored", "description": "同时显示被忽略的文件" }
+    ]
+  },
+  {
+    "id": "git-add",
+    "name": "git add",
+    "platform": "Git",
+    "summary": "把文件变更加入暂存区",
+    "aliases": ["暂存", "stage", "add"],
+    "keywords": ["index", "patch", "tracked"],
+    "simple": [
+      { "command": "git add file.txt", "description": "暂存指定文件" },
+      { "command": "git add .", "description": "暂存当前目录下的全部变更" }
+    ],
+    "full": [
+      { "command": "git add -p", "description": "逐块审查并选择要暂存的变更" },
+      { "command": "git add -u", "description": "仅暂存已跟踪文件的修改和删除" },
+      { "command": "git add --intent-to-add new-file.txt", "description": "记录新文件以便查看完整 diff，但不暂存内容" }
+    ]
+  },
+  {
+    "id": "git-commit",
+    "name": "git commit",
+    "platform": "Git",
+    "summary": "提交暂存区中的变更",
+    "aliases": ["提交", "commit"],
+    "keywords": ["message", "amend", "author", "signoff"],
+    "simple": [
+      { "command": "git commit -m \"feat: describe the change\"", "description": "使用提交说明创建提交" },
+      { "command": "git commit", "description": "打开编辑器编写提交说明" }
+    ],
+    "full": [
+      { "command": "git commit --amend --no-edit", "description": "把新变更补入上一次提交并保留说明" },
+      { "command": "git commit --amend -m \"fix: corrected message\"", "description": "修改上一次提交及其说明" },
+      { "command": "git commit --signoff -m \"feat: describe the change\"", "description": "创建带 Signed-off-by 的提交" }
+    ]
+  },
+  {
+    "id": "git-diff",
+    "name": "git diff",
+    "platform": "Git",
+    "summary": "比较工作区、暂存区或提交之间的差异",
+    "aliases": ["差异", "diff"],
+    "keywords": ["staged", "stat", "name-only", "patch"],
+    "simple": [
+      { "command": "git diff", "description": "查看尚未暂存的变更" },
+      { "command": "git diff --staged", "description": "查看已经暂存的变更" }
+    ],
+    "full": [
+      { "command": "git diff main...HEAD", "description": "查看当前分支相对 main 引入的变更" },
+      { "command": "git diff --stat HEAD~5..HEAD", "description": "汇总最近 5 个提交的文件变更" },
+      { "command": "git diff --word-diff=color", "description": "以内联单词级方式查看差异" }
+    ]
+  },
+  {
+    "id": "git-log",
+    "name": "git log",
+    "platform": "Git",
+    "summary": "查看和筛选提交历史",
+    "aliases": ["历史", "日志", "log"],
+    "keywords": ["graph", "oneline", "author", "grep"],
+    "simple": [
+      { "command": "git log --oneline", "description": "每个提交显示一行" },
+      { "command": "git log -n 10", "description": "查看最近 10 个提交" }
+    ],
+    "full": [
+      { "command": "git log --graph --decorate --oneline --all", "description": "以图形方式查看全部分支历史" },
+      { "command": "git log --since='2 weeks ago' --author='name' --oneline", "description": "按时间和作者筛选提交" },
+      { "command": "git log -S'functionName' --source --all", "description": "查找增删指定文本的提交" }
+    ]
+  },
+  {
+    "id": "git-branch",
+    "name": "git branch",
+    "platform": "Git",
+    "summary": "列出、创建、重命名和删除分支",
+    "aliases": ["分支", "branch"],
+    "keywords": ["delete", "rename", "merged", "remote"],
+    "simple": [
+      { "command": "git branch", "description": "列出本地分支" },
+      { "command": "git branch feature/my-change", "description": "创建新分支但不切换" }
+    ],
+    "full": [
+      { "command": "git branch -m old-name new-name", "description": "重命名分支" },
+      { "command": "git branch --merged main", "description": "列出已合并到 main 的分支" },
+      { "command": "git branch -d feature/done", "description": "安全删除已合并的本地分支" }
+    ]
+  },
+  {
+    "id": "git-switch",
+    "name": "git switch",
+    "platform": "Git",
+    "summary": "切换或创建分支",
+    "aliases": ["切换分支", "switch"],
+    "keywords": ["create", "detach", "track"],
+    "simple": [
+      { "command": "git switch main", "description": "切换到 main 分支" },
+      { "command": "git switch -c feature/my-change", "description": "创建并切换到新分支" }
+    ],
+    "full": [
+      { "command": "git switch -c feature/my-change --track origin/feature/my-change", "description": "基于远程分支创建跟踪分支" },
+      { "command": "git switch --detach v1.0.0", "description": "以 detached HEAD 查看指定标签" },
+      { "command": "git switch -", "description": "切回上一个分支" }
+    ]
+  },
+  {
+    "id": "git-merge",
+    "name": "git merge",
+    "platform": "Git",
+    "summary": "把另一分支的历史合并到当前分支",
+    "aliases": ["合并分支", "merge"],
+    "keywords": ["conflict", "squash", "no-ff", "abort"],
+    "simple": [
+      { "command": "git merge feature/my-change", "description": "把指定分支合并到当前分支" }
+    ],
+    "full": [
+      { "command": "git merge --no-ff feature/my-change", "description": "总是创建合并提交" },
+      { "command": "git merge --squash feature/my-change", "description": "把分支变更压缩到暂存区但不创建合并提交" },
+      { "command": "git merge --abort", "description": "放弃正在进行且有冲突的合并" }
+    ]
+  },
+  {
+    "id": "git-rebase",
+    "name": "git rebase",
+    "platform": "Git",
+    "summary": "把当前分支提交重放到新的基线上",
+    "aliases": ["变基", "rebase"],
+    "keywords": ["interactive", "continue", "abort", "autosquash"],
+    "simple": [
+      { "command": "git rebase main", "description": "把当前分支变基到 main" }
+    ],
+    "full": [
+      { "command": "git rebase -i HEAD~5", "description": "交互式整理最近 5 个提交" },
+      { "command": "git rebase --continue", "description": "解决冲突后继续变基" },
+      { "command": "git rebase --abort", "description": "放弃变基并恢复原状态" }
+    ]
+  },
+  {
+    "id": "git-pull",
+    "name": "git pull",
+    "platform": "Git",
+    "summary": "获取远程变更并整合到当前分支",
+    "aliases": ["拉取", "pull"],
+    "keywords": ["fetch", "rebase", "ff-only", "remote"],
+    "simple": [
+      { "command": "git pull", "description": "拉取并整合当前跟踪分支" },
+      { "command": "git pull origin main", "description": "从 origin 拉取 main" }
+    ],
+    "full": [
+      { "command": "git pull --rebase --autostash", "description": "自动暂存工作区后以变基方式拉取" },
+      { "command": "git pull --ff-only", "description": "仅允许快进，避免意外合并提交" }
+    ]
+  },
+  {
+    "id": "git-push",
+    "name": "git push",
+    "platform": "Git",
+    "summary": "把本地提交和引用推送到远程仓库",
+    "aliases": ["推送", "push"],
+    "keywords": ["upstream", "force-with-lease", "tags", "delete"],
+    "simple": [
+      { "command": "git push", "description": "推送当前跟踪分支" },
+      { "command": "git push -u origin feature/my-change", "description": "首次推送并设置上游分支" }
+    ],
+    "full": [
+      { "command": "git push --force-with-lease", "description": "仅在远程未被他人更新时安全强推" },
+      { "command": "git push origin --delete feature/old", "description": "删除远程分支" },
+      { "command": "git push origin --tags", "description": "推送全部本地标签" }
+    ]
+  },
+  {
+    "id": "git-fetch",
+    "name": "git fetch",
+    "platform": "Git",
+    "summary": "获取远程对象和引用但不修改工作区",
+    "aliases": ["获取远程", "fetch"],
+    "keywords": ["prune", "all", "tags", "remote"],
+    "simple": [
+      { "command": "git fetch", "description": "获取默认远程的更新" },
+      { "command": "git fetch origin", "description": "获取 origin 的更新" }
+    ],
+    "full": [
+      { "command": "git fetch --all --prune", "description": "更新所有远程并清理失效引用" },
+      { "command": "git fetch origin pull/123/head:pr-123", "description": "把指定拉取请求获取为本地分支" }
+    ]
+  },
+  {
+    "id": "git-remote",
+    "name": "git remote",
+    "platform": "Git",
+    "summary": "查看和管理远程仓库",
+    "aliases": ["远程仓库", "remote"],
+    "keywords": ["origin", "url", "add", "set-url"],
+    "simple": [
+      { "command": "git remote -v", "description": "查看远程仓库及其地址" },
+      { "command": "git remote add origin https://github.com/owner/repo.git", "description": "添加名为 origin 的远程" }
+    ],
+    "full": [
+      { "command": "git remote set-url origin git@github.com:owner/repo.git", "description": "修改 origin 地址" },
+      { "command": "git remote show origin", "description": "查看远程分支和跟踪关系详情" },
+      { "command": "git remote prune origin", "description": "删除 origin 中已失效的远程跟踪引用" }
+    ]
+  },
+  {
+    "id": "git-stash",
+    "name": "git stash",
+    "platform": "Git",
+    "summary": "临时保存尚未提交的工作区变更",
+    "aliases": ["暂存工作区", "stash"],
+    "keywords": ["pop", "apply", "list", "untracked"],
+    "simple": [
+      { "command": "git stash push -m \"work in progress\"", "description": "保存当前已跟踪文件的变更" },
+      { "command": "git stash pop", "description": "恢复并删除最近一次 stash" }
+    ],
+    "full": [
+      { "command": "git stash push --include-untracked -m \"work in progress\"", "description": "同时保存未跟踪文件" },
+      { "command": "git stash list", "description": "列出全部 stash" },
+      { "command": "git stash apply stash@{2}", "description": "恢复指定 stash 但保留记录" }
+    ]
+  },
+  {
+    "id": "git-tag",
+    "name": "git tag",
+    "platform": "Git",
+    "summary": "创建、查看和删除版本标签",
+    "aliases": ["标签", "tag", "版本"],
+    "keywords": ["annotated", "delete", "push", "release"],
+    "simple": [
+      { "command": "git tag", "description": "列出全部标签" },
+      { "command": "git tag v1.0.0", "description": "在当前提交创建轻量标签" }
+    ],
+    "full": [
+      { "command": "git tag -a v1.0.0 -m \"Release v1.0.0\"", "description": "创建带说明的标签" },
+      { "command": "git push origin v1.0.0", "description": "推送指定标签" },
+      { "command": "git tag -d v1.0.0 && git push origin :refs/tags/v1.0.0", "description": "删除本地和远程标签" }
+    ]
+  },
+  {
+    "id": "git-reset",
+    "name": "git reset",
+    "platform": "Git",
+    "summary": "移动 HEAD 或取消暂存；使用 hard 前请确认变更可丢弃",
+    "aliases": ["重置", "取消暂存", "reset"],
+    "keywords": ["soft", "mixed", "hard", "index"],
+    "simple": [
+      { "command": "git reset file.txt", "description": "取消暂存指定文件，保留工作区变更" },
+      { "command": "git reset", "description": "取消暂存全部文件，保留工作区变更" }
+    ],
+    "full": [
+      { "command": "git reset --soft HEAD~1", "description": "撤销上一次提交并保留暂存状态" },
+      { "command": "git reset --mixed HEAD~1", "description": "撤销提交和暂存，保留工作区变更" },
+      { "command": "git reset --hard HEAD", "description": "丢弃已跟踪文件的全部工作区变更（谨慎）" }
+    ]
+  },
+  {
+    "id": "git-restore",
+    "name": "git restore",
+    "platform": "Git",
+    "summary": "恢复工作区文件或取消暂存",
+    "aliases": ["恢复文件", "取消暂存", "restore"],
+    "keywords": ["staged", "source", "worktree", "discard"],
+    "simple": [
+      { "command": "git restore file.txt", "description": "丢弃指定文件未暂存的变更" },
+      { "command": "git restore --staged file.txt", "description": "取消暂存并保留工作区变更" }
+    ],
+    "full": [
+      { "command": "git restore --source=HEAD~1 -- file.txt", "description": "把文件恢复为上一个提交中的版本" },
+      { "command": "git restore --staged --worktree file.txt", "description": "同时恢复暂存区和工作区文件（会丢弃变更）" },
+      { "command": "git restore -p file.txt", "description": "逐块选择要丢弃的工作区变更" }
+    ]
+  },
+  {
+    "id": "git-revert",
+    "name": "git revert",
+    "platform": "Git",
+    "summary": "通过新提交安全撤销已有提交",
+    "aliases": ["撤销提交", "revert"],
+    "keywords": ["undo", "mainline", "no-commit", "public"],
+    "simple": [
+      { "command": "git revert <commit>", "description": "创建一个反向提交来撤销指定提交" }
+    ],
+    "full": [
+      { "command": "git revert --no-commit HEAD~3..HEAD", "description": "汇总撤销最近 3 个提交但暂不提交" },
+      { "command": "git revert -m 1 <merge-commit>", "description": "以第一父提交为主线撤销合并提交" },
+      { "command": "git revert --abort", "description": "放弃正在进行且有冲突的 revert" }
+    ]
+  },
+  {
+    "id": "git-cherry-pick",
+    "name": "git cherry-pick",
+    "platform": "Git",
+    "summary": "把指定提交应用到当前分支",
+    "aliases": ["拣选提交", "cherry-pick"],
+    "keywords": ["commit", "continue", "abort", "no-commit"],
+    "simple": [
+      { "command": "git cherry-pick <commit>", "description": "应用一个指定提交" }
+    ],
+    "full": [
+      { "command": "git cherry-pick <oldest>^..<newest>", "description": "按顺序应用一段连续提交" },
+      { "command": "git cherry-pick --no-commit <commit>", "description": "应用变更但暂不创建提交" },
+      { "command": "git cherry-pick --abort", "description": "放弃正在进行的 cherry-pick" }
+    ]
+  },
+  {
+    "id": "git-reflog",
+    "name": "git reflog",
+    "platform": "Git",
+    "summary": "查看本地引用移动历史，用于找回提交",
+    "aliases": ["引用日志", "找回提交", "reflog"],
+    "keywords": ["recover", "head", "reset", "lost"],
+    "simple": [
+      { "command": "git reflog", "description": "查看 HEAD 的本地移动记录" }
+    ],
+    "full": [
+      { "command": "git reflog --date=iso", "description": "以 ISO 时间显示引用日志" },
+      { "command": "git branch recovered <commit-from-reflog>", "description": "从 reflog 找到的提交创建恢复分支" },
+      { "command": "git reflog show --all", "description": "显示所有引用的日志" }
+    ]
+  },
+  {
+    "id": "git-worktree",
+    "name": "git worktree",
+    "platform": "Git",
+    "summary": "为同一仓库创建多个并行工作目录",
+    "aliases": ["多工作区", "worktree"],
+    "keywords": ["add", "list", "remove", "branch"],
+    "simple": [
+      { "command": "git worktree list", "description": "列出全部工作树" },
+      { "command": "git worktree add ../feature-worktree feature/my-change", "description": "为现有分支创建工作树" }
+    ],
+    "full": [
+      { "command": "git worktree add -b hotfix/urgent ../hotfix main", "description": "从 main 创建新分支及工作树" },
+      { "command": "git worktree remove ../feature-worktree", "description": "删除干净的工作树" },
+      { "command": "git worktree prune", "description": "清理失效工作树的管理信息" }
+    ]
+  },
+  {
+    "id": "git-config",
+    "name": "git config",
+    "platform": "Git",
+    "summary": "读取和设置 Git 配置",
+    "aliases": ["配置", "config"],
+    "keywords": ["user", "email", "global", "alias"],
+    "simple": [
+      { "command": "git config --global user.name \"Your Name\"", "description": "设置全局提交者姓名" },
+      { "command": "git config --global user.email \"you@example.com\"", "description": "设置全局提交者邮箱" }
+    ],
+    "full": [
+      { "command": "git config --list --show-origin", "description": "列出配置及其来源文件" },
+      { "command": "git config --global init.defaultBranch main", "description": "设置新仓库的默认分支名" },
+      { "command": "git config --global alias.lg \"log --graph --decorate --oneline --all\"", "description": "创建常用图形日志别名" }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+﻿{
+    "name":  "tldr-pages",
+    "repository":  "https://github.com/tldr-pages/tldr.git",
+    "updateMode":  "cached-shallow-sparse-clone",
+    "offline":  true,
+    "branch":  "main",
+    "commit":  "f92a4d1dd264dae6eae4cf0b6b46239db16943bd",
+    "downloadedAt":  "2026-07-20T07:44:37.2972476+00:00",
+    "sources":  [
+                    {
+                        "language":  "en",
+                        "path":  "pages",
+                        "supportedPageCount":  6906
+                    },
+                    {
+                        "language":  "zh",
+                        "path":  "pages.zh",
+                        "supportedPageCount":  1300
+                    }
+                ],
+    "generatedIndex":  "../../src/CommandMan.Core/Data/tldr.json",
+    "license":  "CC BY 4.0"
+}

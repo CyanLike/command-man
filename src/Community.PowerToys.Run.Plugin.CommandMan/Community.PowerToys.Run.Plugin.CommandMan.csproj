@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Platforms>x64;ARM64</Platforms>
+    <PlatformTarget>$(Platform)</PlatformTarget>
+    <AssemblyName>Community.PowerToys.Run.Plugin.CommandMan</AssemblyName>
+    <RootNamespace>Community.PowerToys.Run.Plugin.CommandMan</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>CommandMan contributors</Authors>
+    <Description>Search and copy common Windows, Linux, and Git command examples in PowerToys Run.</Description>
+    <RepositoryUrl>https://github.com/CyanLike/command-man</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommandMan.Core\CommandMan.Core.csproj" />
+    <PackageReference Include="Community.PowerToys.Run.Plugin.Dependencies" Version="0.97.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Images\*.png" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\THIRD_PARTY_NOTICES.md" Link="THIRD_PARTY_NOTICES.md" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\third_party\tldr\LICENSE.md" Link="Licenses\tldr-pages.LICENSE.md" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\third_party\tldr\SOURCE.json" Link="Licenses\tldr-pages.SOURCE.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

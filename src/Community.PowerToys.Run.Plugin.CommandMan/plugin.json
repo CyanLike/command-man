@@ -1,0 +1,14 @@
+{
+  "ID": "F40E2D8DA2804DF3ADBB3E70B61C2F11",
+  "ActionKeyword": "cmd",
+  "IsGlobal": false,
+  "Name": "Command Man",
+  "Author": "CommandMan contributors",
+  "Version": "1.0.0",
+  "Language": "csharp",
+  "Website": "https://github.com/CyanLike/command-man",
+  "ExecuteFileName": "Community.PowerToys.Run.Plugin.CommandMan.dll",
+  "IcoPathDark": "Images\\commandman.dark.png",
+  "IcoPathLight": "Images\\commandman.light.png",
+  "DynamicLoading": true
+}

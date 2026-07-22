@@ -1,0 +1,394 @@
+[
+  {
+    "id": "linux-ls",
+    "name": "ls",
+    "platform": "Linux",
+    "summary": "列出目录内容",
+    "aliases": ["列表", "dir"],
+    "keywords": ["文件", "目录", "隐藏", "排序"],
+    "simple": [
+      { "command": "ls -la", "description": "以长格式列出全部文件（含隐藏项）" },
+      { "command": "ls -lh", "description": "以易读大小显示文件" }
+    ],
+    "full": [
+      { "command": "ls -lah --sort=time", "description": "按修改时间列出全部文件" },
+      { "command": "ls -lS | head -n 20", "description": "显示最大的 20 个目录项" }
+    ]
+  },
+  {
+    "id": "linux-cp",
+    "name": "cp",
+    "platform": "Linux",
+    "summary": "复制文件和目录",
+    "aliases": ["复制", "copy"],
+    "keywords": ["文件", "目录", "递归", "保留属性"],
+    "simple": [
+      { "command": "cp source.txt target.txt", "description": "复制文件" },
+      { "command": "cp -r source/ target/", "description": "递归复制目录" }
+    ],
+    "full": [
+      { "command": "cp -a source/ target/", "description": "归档复制并保留链接、权限和时间" },
+      { "command": "cp -rv --update source/ target/", "description": "仅复制较新的文件并显示过程" }
+    ]
+  },
+  {
+    "id": "linux-mv",
+    "name": "mv",
+    "platform": "Linux",
+    "summary": "移动或重命名文件和目录",
+    "aliases": ["移动", "重命名", "rename"],
+    "keywords": ["文件", "目录", "覆盖"],
+    "simple": [
+      { "command": "mv old.txt new.txt", "description": "重命名文件" },
+      { "command": "mv file.txt /tmp/", "description": "移动文件到目录" }
+    ],
+    "full": [
+      { "command": "mv -iv source/* target/", "description": "交互确认覆盖并显示移动过程" },
+      { "command": "mv --backup=numbered file.txt target/", "description": "覆盖时保留编号备份" }
+    ]
+  },
+  {
+    "id": "linux-rm",
+    "name": "rm",
+    "platform": "Linux",
+    "summary": "删除文件或目录，执行前应确认路径",
+    "aliases": ["删除", "remove"],
+    "keywords": ["文件", "目录", "递归", "谨慎"],
+    "simple": [
+      { "command": "rm file.txt", "description": "删除单个文件" },
+      { "command": "rm -i file.txt", "description": "确认后删除文件" }
+    ],
+    "full": [
+      { "command": "rm -rI target-directory/", "description": "递归删除目录并进行一次确认" },
+      { "command": "find . -type f -name '*.tmp' -print -delete", "description": "先显示再删除当前目录下的临时文件" }
+    ]
+  },
+  {
+    "id": "linux-mkdir",
+    "name": "mkdir",
+    "platform": "Linux",
+    "summary": "创建目录",
+    "aliases": ["创建目录", "md"],
+    "keywords": ["directory", "parents", "权限"],
+    "simple": [
+      { "command": "mkdir new-directory", "description": "创建一个目录" },
+      { "command": "mkdir -p path/to/directory", "description": "同时创建缺失的父目录" }
+    ],
+    "full": [
+      { "command": "mkdir -pv project/{src,tests,docs}", "description": "一次创建项目目录树并显示过程" },
+      { "command": "mkdir -m 750 private-directory", "description": "创建目录并设置权限" }
+    ]
+  },
+  {
+    "id": "linux-cat",
+    "name": "cat",
+    "platform": "Linux",
+    "summary": "输出、合并或创建文本内容",
+    "aliases": ["查看文件", "concatenate"],
+    "keywords": ["文本", "合并", "行号", "管道"],
+    "simple": [
+      { "command": "cat file.txt", "description": "输出文件内容" },
+      { "command": "cat file1.txt file2.txt > combined.txt", "description": "合并文件" }
+    ],
+    "full": [
+      { "command": "cat -n file.txt", "description": "显示内容并为所有行编号" },
+      { "command": "cat > config.txt <<'EOF'\nkey=value\nEOF", "description": "使用 here-document 创建多行文件" }
+    ]
+  },
+  {
+    "id": "linux-grep",
+    "name": "grep",
+    "platform": "Linux",
+    "summary": "按文本或正则表达式搜索内容",
+    "aliases": ["文本搜索", "匹配"],
+    "keywords": ["regex", "递归", "行号", "过滤"],
+    "simple": [
+      { "command": "grep 'error' app.log", "description": "在文件中搜索 error" },
+      { "command": "grep -in 'error' app.log", "description": "忽略大小写并显示行号" }
+    ],
+    "full": [
+      { "command": "grep -RIn --exclude-dir=.git -E 'TODO|FIXME' .", "description": "递归搜索多个模式并排除 .git" },
+      { "command": "grep -n -C 3 'timeout' app.log", "description": "显示匹配行前后各 3 行" },
+      { "command": "grep -v '^#' config.ini | grep -v '^$'", "description": "排除注释行和空行" }
+    ]
+  },
+  {
+    "id": "linux-find",
+    "name": "find",
+    "platform": "Linux",
+    "summary": "按名称、类型、大小或时间递归查找文件",
+    "aliases": ["查找文件", "搜索目录"],
+    "keywords": ["name", "size", "mtime", "exec"],
+    "simple": [
+      { "command": "find . -name '*.log'", "description": "查找当前目录下的日志文件" },
+      { "command": "find . -type d -name node_modules", "description": "查找名为 node_modules 的目录" }
+    ],
+    "full": [
+      { "command": "find /var/log -type f -size +100M -printf '%s %p\\n' | sort -nr", "description": "按大小列出超过 100MB 的日志" },
+      { "command": "find . -type f -mtime -7 -not -path './.git/*'", "description": "查找 7 天内修改且不在 .git 中的文件" },
+      { "command": "find . -type f -name '*.tmp' -exec rm -i {} +", "description": "逐批确认删除临时文件" }
+    ]
+  },
+  {
+    "id": "linux-sed",
+    "name": "sed",
+    "platform": "Linux",
+    "summary": "按规则转换、替换和筛选文本流",
+    "aliases": ["流编辑", "替换文本"],
+    "keywords": ["regex", "replace", "文本", "批量"],
+    "simple": [
+      { "command": "sed 's/old/new/' file.txt", "description": "替换每行第一个匹配项并输出" },
+      { "command": "sed 's/old/new/g' file.txt", "description": "替换每行全部匹配项并输出" }
+    ],
+    "full": [
+      { "command": "sed -i.bak 's/old/new/g' file.txt", "description": "原地替换并保留 .bak 备份" },
+      { "command": "sed -n '10,20p' file.txt", "description": "仅输出第 10 到 20 行" },
+      { "command": "sed -E '/^#|^$/d; s/[[:space:]]+$//' config.ini", "description": "删除注释/空行并移除行尾空白" }
+    ]
+  },
+  {
+    "id": "linux-awk",
+    "name": "awk",
+    "platform": "Linux",
+    "summary": "按字段处理和汇总结构化文本",
+    "aliases": ["字段处理", "文本统计"],
+    "keywords": ["column", "sum", "delimiter", "报表"],
+    "simple": [
+      { "command": "awk '{print $1}' file.txt", "description": "输出每行第一列" },
+      { "command": "awk -F: '{print $1}' /etc/passwd", "description": "按冒号分隔并输出用户名" }
+    ],
+    "full": [
+      { "command": "awk -F, 'NR>1 {sum+=$3} END {print sum}' data.csv", "description": "汇总 CSV 第三列（跳过表头）" },
+      { "command": "awk '$3 > 80 {printf \"%-20s %s\\n\", $1, $3}' scores.txt", "description": "筛选并格式化输出分数大于 80 的行" }
+    ]
+  },
+  {
+    "id": "linux-xargs",
+    "name": "xargs",
+    "platform": "Linux",
+    "summary": "把标准输入转换为另一命令的参数",
+    "aliases": ["参数管道", "批处理"],
+    "keywords": ["stdin", "parallel", "null", "批量"],
+    "simple": [
+      { "command": "printf '%s\\n' one two three | xargs -n 1 echo", "description": "每次取一个参数执行命令" }
+    ],
+    "full": [
+      { "command": "find . -type f -name '*.log' -print0 | xargs -0 grep -n 'ERROR'", "description": "安全处理含空格的文件名并搜索日志" },
+      { "command": "cat urls.txt | xargs -n 1 -P 8 curl -O", "description": "并行 8 路下载 URL 列表" }
+    ]
+  },
+  {
+    "id": "linux-chmod",
+    "name": "chmod",
+    "platform": "Linux",
+    "summary": "修改文件和目录权限",
+    "aliases": ["权限", "mode"],
+    "keywords": ["read", "write", "execute", "递归"],
+    "simple": [
+      { "command": "chmod +x script.sh", "description": "为脚本添加可执行权限" },
+      { "command": "chmod 644 file.txt", "description": "设置所有者读写、其他用户只读" }
+    ],
+    "full": [
+      { "command": "chmod -R u=rwX,g=rX,o= directory/", "description": "递归设置目录的安全常用权限" },
+      { "command": "find . -type f -exec chmod 640 {} + && find . -type d -exec chmod 750 {} +", "description": "分别设置文件和目录权限" }
+    ]
+  },
+  {
+    "id": "linux-ps",
+    "name": "ps",
+    "platform": "Linux",
+    "summary": "查看系统进程快照",
+    "aliases": ["进程", "process"],
+    "keywords": ["pid", "cpu", "memory", "tree"],
+    "simple": [
+      { "command": "ps aux", "description": "查看全部进程的详细信息" },
+      { "command": "ps -ef", "description": "以完整格式查看全部进程" }
+    ],
+    "full": [
+      { "command": "ps aux --sort=-%cpu | head -n 11", "description": "查看 CPU 占用最高的 10 个进程" },
+      { "command": "ps aux --sort=-%mem | head -n 11", "description": "查看内存占用最高的 10 个进程" },
+      { "command": "ps -eo pid,ppid,user,stat,%cpu,%mem,cmd --forest", "description": "以树形关系显示自定义进程列" }
+    ]
+  },
+  {
+    "id": "linux-kill",
+    "name": "kill",
+    "platform": "Linux",
+    "summary": "向进程发送信号以终止或重新加载",
+    "aliases": ["结束进程", "signal"],
+    "keywords": ["pid", "term", "hup", "强制"],
+    "simple": [
+      { "command": "kill 1234", "description": "向进程发送 TERM 信号" },
+      { "command": "pkill -f process-name", "description": "按完整命令行匹配并终止进程" }
+    ],
+    "full": [
+      { "command": "kill -HUP 1234", "description": "发送 HUP 信号以请求重载配置" },
+      { "command": "kill -TERM 1234; sleep 5; kill -KILL 1234 2>/dev/null", "description": "先优雅终止，超时后再强制终止" }
+    ]
+  },
+  {
+    "id": "linux-df",
+    "name": "df",
+    "platform": "Linux",
+    "summary": "查看文件系统磁盘空间使用情况",
+    "aliases": ["磁盘空间", "filesystem"],
+    "keywords": ["disk", "mount", "容量", "inode"],
+    "simple": [
+      { "command": "df -h", "description": "以易读单位查看磁盘空间" }
+    ],
+    "full": [
+      { "command": "df -hT -x tmpfs -x devtmpfs", "description": "显示文件系统类型并排除临时文件系统" },
+      { "command": "df -i", "description": "查看 inode 使用情况" }
+    ]
+  },
+  {
+    "id": "linux-du",
+    "name": "du",
+    "platform": "Linux",
+    "summary": "统计文件和目录占用的磁盘空间",
+    "aliases": ["目录大小", "disk usage"],
+    "keywords": ["size", "容量", "排序", "深度"],
+    "simple": [
+      { "command": "du -sh .", "description": "查看当前目录总大小" },
+      { "command": "du -sh *", "description": "查看各直接子项大小" }
+    ],
+    "full": [
+      { "command": "du -h --max-depth=1 /var | sort -h", "description": "按大小排序 /var 的一级子目录" },
+      { "command": "du -ah . | sort -rh | head -n 20", "description": "显示当前目录最大的 20 个文件或目录" }
+    ]
+  },
+  {
+    "id": "linux-tar",
+    "name": "tar",
+    "platform": "Linux",
+    "summary": "创建、查看和解压 tar 归档",
+    "aliases": ["压缩", "解压", "归档"],
+    "keywords": ["gzip", "xz", "archive", "backup"],
+    "simple": [
+      { "command": "tar -czf archive.tar.gz directory/", "description": "创建 gzip 压缩归档" },
+      { "command": "tar -xzf archive.tar.gz", "description": "解压 gzip 归档" }
+    ],
+    "full": [
+      { "command": "tar -czf backup.tar.gz --exclude='.git' --exclude='node_modules' project/", "description": "创建归档并排除无关目录" },
+      { "command": "tar -xzf archive.tar.gz -C /target/path --strip-components=1", "description": "解压到指定目录并移除首层路径" },
+      { "command": "tar -tzf archive.tar.gz", "description": "不解压，仅查看归档内容" }
+    ]
+  },
+  {
+    "id": "linux-curl",
+    "name": "curl",
+    "platform": "Linux",
+    "summary": "通过 HTTP 等协议传输数据和调用 API",
+    "aliases": ["http请求", "下载", "api"],
+    "keywords": ["get", "post", "header", "json"],
+    "simple": [
+      { "command": "curl https://example.com", "description": "发送 GET 请求" },
+      { "command": "curl -LO https://example.com/file.zip", "description": "下载并保留远程文件名" }
+    ],
+    "full": [
+      { "command": "curl -fsSL --retry 3 https://example.com/install.sh -o install.sh", "description": "失败即退出、自动重试并保存响应" },
+      { "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"name\":\"demo\"}' https://api.example.com/items", "description": "发送 JSON POST 请求" },
+      { "command": "curl -I -L https://example.com", "description": "跟随重定向并仅查看响应头" }
+    ]
+  },
+  {
+    "id": "linux-ssh",
+    "name": "ssh",
+    "platform": "Linux",
+    "summary": "安全登录远程主机并执行命令",
+    "aliases": ["远程登录", "secure shell"],
+    "keywords": ["key", "port", "tunnel", "跳板"],
+    "simple": [
+      { "command": "ssh user@example.com", "description": "登录远程主机" },
+      { "command": "ssh -p 2222 user@example.com", "description": "通过自定义端口登录" }
+    ],
+    "full": [
+      { "command": "ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes user@example.com", "description": "仅使用指定私钥登录" },
+      { "command": "ssh -J jump-user@jump.example.com user@internal.example.com", "description": "通过跳板机登录内网主机" },
+      { "command": "ssh -L 8080:localhost:80 user@example.com", "description": "建立本地端口转发" }
+    ]
+  },
+  {
+    "id": "linux-scp",
+    "name": "scp",
+    "platform": "Linux",
+    "summary": "通过 SSH 安全复制文件",
+    "aliases": ["远程复制", "上传", "下载"],
+    "keywords": ["ssh", "recursive", "port", "transfer"],
+    "simple": [
+      { "command": "scp file.txt user@example.com:/tmp/", "description": "上传文件到远程主机" },
+      { "command": "scp user@example.com:/tmp/file.txt .", "description": "下载远程文件到当前目录" }
+    ],
+    "full": [
+      { "command": "scp -r -P 2222 directory/ user@example.com:/srv/", "description": "通过自定义端口递归上传目录" },
+      { "command": "scp -3 user@host1:/path/file user@host2:/path/", "description": "经由本机在两个远程主机间复制" }
+    ]
+  },
+  {
+    "id": "linux-systemctl",
+    "name": "systemctl",
+    "platform": "Linux",
+    "summary": "管理 systemd 服务和系统单元",
+    "aliases": ["服务管理", "service"],
+    "keywords": ["start", "stop", "restart", "enable"],
+    "simple": [
+      { "command": "systemctl status nginx", "description": "查看 nginx 服务状态" },
+      { "command": "sudo systemctl restart nginx", "description": "重启 nginx 服务" }
+    ],
+    "full": [
+      { "command": "sudo systemctl enable --now nginx", "description": "立即启动并设置开机自启" },
+      { "command": "systemctl list-units --type=service --state=failed", "description": "列出启动失败的服务" },
+      { "command": "sudo systemctl daemon-reload && sudo systemctl restart my-app", "description": "重新加载单元文件并重启服务" }
+    ]
+  },
+  {
+    "id": "linux-journalctl",
+    "name": "journalctl",
+    "platform": "Linux",
+    "summary": "查询 systemd 日志",
+    "aliases": ["系统日志", "服务日志"],
+    "keywords": ["logs", "unit", "follow", "since"],
+    "simple": [
+      { "command": "journalctl -u nginx", "description": "查看 nginx 服务日志" },
+      { "command": "journalctl -u nginx -f", "description": "实时跟踪 nginx 服务日志" }
+    ],
+    "full": [
+      { "command": "journalctl -u nginx --since '1 hour ago' --no-pager", "description": "查看最近一小时的服务日志" },
+      { "command": "journalctl -p err..alert -b", "description": "查看本次启动中的错误级别日志" },
+      { "command": "journalctl --disk-usage", "description": "查看日志占用的磁盘空间" }
+    ]
+  },
+  {
+    "id": "linux-ip",
+    "name": "ip",
+    "platform": "Linux",
+    "summary": "查看和配置网络接口、地址与路由",
+    "aliases": ["网络配置", "ifconfig", "route"],
+    "keywords": ["address", "link", "route", "网卡"],
+    "simple": [
+      { "command": "ip addr show", "description": "查看所有网络接口地址" },
+      { "command": "ip route show", "description": "查看路由表" }
+    ],
+    "full": [
+      { "command": "ip -br addr", "description": "以简洁格式查看接口地址和状态" },
+      { "command": "ip route get 8.8.8.8", "description": "查看到指定目标实际使用的路由" },
+      { "command": "sudo ip link set dev eth0 up", "description": "启用指定网络接口" }
+    ]
+  },
+  {
+    "id": "linux-ss",
+    "name": "ss",
+    "platform": "Linux",
+    "summary": "查看套接字、连接和监听端口",
+    "aliases": ["端口", "netstat", "socket"],
+    "keywords": ["tcp", "udp", "listen", "pid"],
+    "simple": [
+      { "command": "ss -tulpn", "description": "查看 TCP/UDP 监听端口和进程" }
+    ],
+    "full": [
+      { "command": "ss -tan state established", "description": "查看已建立的 TCP 连接" },
+      { "command": "ss -ltnp 'sport = :8080'", "description": "查看监听 8080 端口的进程" },
+      { "command": "ss -s", "description": "显示套接字汇总统计" }
+    ]
+  }
+]

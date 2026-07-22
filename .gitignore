@@ -1,0 +1,13 @@
+bin/
+obj/
+artifacts/
+.vs/
+.vscode/
+*.user
+*.suo
+TestResults/
+coverage/
+__pycache__/
+*.pyc
+.cache/
+*.log
